@@ -37,6 +37,7 @@
     android:padding="15dp" />
 
 <TextView
+    android:id="@+id/tvgender"
     android:layout_width="202dp"
     android:layout_height="48dp"
     android:text="Select Gender "
