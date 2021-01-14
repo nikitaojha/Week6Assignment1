@@ -4,10 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nikita.softuser.R
+import com.nikita.softuser.Storage
 import com.nikita.softuser.model.user
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -17,15 +19,19 @@ class UserAdapter (
 
         ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
 
+    private var storage = Storage()
+
     class  UserViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
         val imgProfile: CircleImageView
+        val imgdelete: ImageView
         val tvName : TextView
         val tvage : TextView
         val tvaddress : TextView
         val tvgender : TextView
 
         init {
+            imgdelete = view.findViewById(R.id.imgdelete)
             imgProfile = view.findViewById(R.id.imgProfile)
             tvName = view.findViewById(R.id.tvName)
             tvage = view.findViewById(R.id.tvage)
@@ -48,7 +54,12 @@ class UserAdapter (
         holder.tvName.text = user.Name
         holder.tvage.text= user.age
         holder.tvaddress.text=user.Address
-        holder.tvgender.text=user.Gender.toString()
+        holder.tvgender.text=user.Gender
+
+        holder.imgdelete.setOnClickListener {
+            storage.deleteStudent(user)
+            notifyItemRemoved(position)
+        }
 
         Glide.with(context)
                 .load(user.Image)
