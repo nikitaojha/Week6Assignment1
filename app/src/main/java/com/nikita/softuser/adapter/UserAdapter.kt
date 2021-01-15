@@ -62,7 +62,7 @@ class UserAdapter (
         }
 
         Glide.with(context)
-                .load(User.ProfileImage)
+                .load(User.userImage)
                 .into(holder.imgProfile)
     }
 

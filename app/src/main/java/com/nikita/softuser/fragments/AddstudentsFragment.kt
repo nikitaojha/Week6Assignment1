@@ -33,6 +33,7 @@ class AddstudentsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_addstudents, container, false)
         etfullname = view.findViewById(R.id.etfullname)
         etage = view.findViewById(R.id.etage)
+        etImage = view.findViewById(R.id.etImage)
         etaddress = view.findViewById(R.id.etaddress)
         radioMale = view.findViewById(R.id.radioMale)
         radioFemale = view.findViewById(R.id.radioFemale)
@@ -51,26 +52,27 @@ class AddstudentsFragment : Fragment() {
         btnsave.setOnClickListener {
             if (validateInput()) {
                 var fullname = etfullname.text.toString()
-                var ProfileImage = etImage.text.toString()
+                var userImage = etImage.text.toString()
                 var age = etage.text.toString()
                 var address = etaddress.text.toString()
-                Database().appenduser(user(fullname, ProfileImage, age, address, gender))
+                Database().appenduser(user(fullname, userImage, age, address, gender))
                 Toast.makeText(view?.context, "Student Added", Toast.LENGTH_LONG).show()
                 etfullname.setText("")
                 etImage.setText("")
                 etaddress.setText("")
                 etage.setText("")
                 etfullname.requestFocus()
-
-            } else {
-                Toast.makeText(view?.context, "Try Again", Toast.LENGTH_SHORT).show()
             }
+            else{
+                Toast.makeText(view?.context, "No student Added", Toast.LENGTH_LONG).show()
+            }
+
         }
         return view
     }
 
     private fun validateInput(): Boolean {
-        var res : Boolean = true
+        var res: Boolean = true
         when {
             TextUtils.isEmpty(etfullname.text) -> {
                 etfullname.error = "Please enter your full name"
@@ -93,10 +95,10 @@ class AddstudentsFragment : Fragment() {
                 res = false
             }
         }
-
         return res
-
     }
+
+
 }
 
 

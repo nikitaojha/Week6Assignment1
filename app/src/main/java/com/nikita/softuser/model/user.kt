@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 data class user(
         val Name: String? = null,
-        val ProfileImage: String? = null,
+        val userImage: String? = null,
         val Age: String? = null,
         val Address: String? = null,
         val Gender: String? = null
