@@ -23,6 +23,8 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingClass" />
 
+
+
     <TextView
         android:id="@+id/tvName"
         android:layout_width="166dp"

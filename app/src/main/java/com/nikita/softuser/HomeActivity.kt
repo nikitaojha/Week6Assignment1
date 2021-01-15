@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 
 class HomeActivity : AppCompatActivity() {
-    private var storage = Storage()
+    private var database = Database()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,19 +31,19 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        var builder = AlertDialog.Builder(this)
-        builder.setTitle("LogOut?")
+        var builder=AlertDialog.Builder(this)
+        builder.setTitle("Logout?")
 
-        builder.setMessage("Are you sure you want to log out?")
+        builder.setMessage("Are you sure want to log out??")
         builder.setIcon(android.R.drawable.ic_dialog_info)
-        builder.setPositiveButton("YES"){ _, _ ->
-            storage.setLoggedIn(null)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("mesage", "Logged Out")
+
+        builder.setPositiveButton("YES"){ _, _->
+            database.setLoggegIn(null)
+            val intent=Intent(this,MainActivity::class.java)
+            intent.putExtra("msg","Logged Out")
             startActivity(intent)
         }
-
-        val alert: AlertDialog = builder.create()
+        val alert:AlertDialog=builder.create()
         alert.setCancelable(true)
         alert.show()
     }

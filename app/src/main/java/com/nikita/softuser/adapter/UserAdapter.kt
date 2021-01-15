@@ -8,18 +8,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.nikita.softuser.Database
 import com.nikita.softuser.R
-import com.nikita.softuser.Storage
+import com.nikita.softuser.fragments.HomeFragment
 import com.nikita.softuser.model.user
 import de.hdodenhof.circleimageview.CircleImageView
 
 class UserAdapter (
         val lstUsers : ArrayList<user>,
-        val context: Context
+        val context: HomeFragment
 
         ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>(){
 
-    private var storage = Storage()
+    private var database= Database()
 
     class  UserViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
@@ -48,27 +49,24 @@ class UserAdapter (
     }
 
 
-
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-       val user = lstUsers[position]
-        holder.tvName.text = user.Name
-        holder.tvage.text= user.age
-        holder.tvaddress.text=user.Address
-        holder.tvgender.text=user.Gender
+        val User=lstUsers[position]
+        holder.tvName.text=User.Name
+        holder.tvage.text= User.Age.toString()
+        holder.tvaddress.text=User.Address
+        holder.tvgender.text=User.Gender
 
         holder.imgdelete.setOnClickListener {
-            storage.deleteStudent(user)
+            database.deleteuser(User)
             notifyItemRemoved(position)
         }
 
         Glide.with(context)
-                .load(user.Image)
+                .load(User.ProfileImage)
                 .into(holder.imgProfile)
     }
+
     override fun getItemCount(): Int {
         return lstUsers.size
     }
-
-
-
 }
